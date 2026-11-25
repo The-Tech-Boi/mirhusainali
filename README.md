@@ -1,22 +1,28 @@
 # mirhusainali.com
 
-My personal site. One page, built with Astro, deployed to GitHub Pages on every push to `main`.
+My personal site. One page, built with Astro, hosted on Cloudflare Pages. Every push to `main` redeploys it.
 
 ```
 npm install
 npm run dev
 ```
 
+## Hosting on Cloudflare Pages
+
+The Cloudflare project is connected to this repo:
+
+- Project name: `mirhusainali` (gives `https://mirhusainali.pages.dev`)
+- Framework preset: Astro
+- Build command: `npm run build`
+- Output directory: `dist`
+
 ## Attaching mirhusainali.com
 
-Once the domain is bought on Namecheap:
-
-1. **DNS at Namecheap** (Domain List → Manage → Advanced DNS). Remove the default parking records, then add:
-   - Four `A` records, host `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - One `CNAME` record, host `www`, value `the-tech-boi.github.io.`
-2. **Verify the domain on GitHub** (Settings → Pages → Verified domains on my profile). This stops anyone else claiming it for their Pages site.
-3. **Point this repo at it**: repo Settings → Pages → Custom domain → `mirhusainali.com`, save, wait for the DNS check, then tick **Enforce HTTPS** once the certificate is issued (can take up to an hour).
-4. **Update the site URL** in two places and push:
+1. **Get the domain onto Cloudflare.** Either buy it from Cloudflare Registrar (Domain Registration → Register Domains), or, if it was bought on Namecheap, add it as a site in Cloudflare (free plan) and change the nameservers at Namecheap (Domain List → Manage → Nameservers → Custom DNS) to the two Cloudflare gives you. Wait for Cloudflare to show the domain as Active.
+2. **Attach it to the project:** Workers & Pages → `mirhusainali` → Custom domains → Set up a custom domain → `mirhusainali.com`. Repeat for `www.mirhusainali.com`. Cloudflare creates the DNS records and the certificate.
+3. **Redirect www to the bare domain** (optional): Rules → Redirect Rules → "Redirect from WWW to root".
+4. **Update the site URL** in three places and push:
    - `astro.config.mjs`: `site: 'https://mirhusainali.com'`
    - `public/robots.txt`: the `Sitemap:` line
-5. Check `https://mirhusainali.com` and `https://www.mirhusainali.com` both load, then submit `https://mirhusainali.com/sitemap-index.xml` in Google Search Console.
+   - `src/pages/index.astro`: the fallback `site` URL
+5. Check `https://mirhusainali.com` loads, then submit `https://mirhusainali.com/sitemap-index.xml` in Google Search Console.
