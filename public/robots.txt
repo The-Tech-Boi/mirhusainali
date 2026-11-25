@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://the-tech-boi.github.io/sitemap-index.xml

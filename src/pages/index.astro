@@ -1,0 +1,595 @@
+---
+import '@fontsource/schibsted-grotesk/400.css';
+import '@fontsource/schibsted-grotesk/500.css';
+import '@fontsource/schibsted-grotesk/700.css';
+import '@fontsource/schibsted-grotesk/800.css';
+import '@fontsource/gloock/400.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/600.css';
+
+const EMAIL = 'mirhusainalimohammed@gmail.com';
+const mailto = `mailto:${EMAIL}`;
+const site = Astro.site?.href ?? 'https://the-tech-boi.github.io/';
+const title = 'Mir Husain Ali';
+const description = 'Mir Husain Ali builds and runs Dynamics 365 CE systems for clients by day and his own tools after hours: valet, Kanz e Aza and WireGuard Manager.';
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Mir Husain Ali',
+  alternateName: 'Mir Husain Ali Mohammed',
+  url: site,
+  jobTitle: 'Dynamics 365 CE & Data Migration Engineer',
+  worksFor: { '@type': 'Organization', name: 'Async Solution' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Amity University' },
+  sameAs: [
+    'https://www.linkedin.com/in/mir-husain-ali-mohammed',
+    'https://github.com/The-Tech-Boi',
+    'https://kanz-e-aza.com',
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={site}>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#eef2f7">
+<meta property="og:type" content="profile">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={site}>
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json" set:html={JSON.stringify(person)} />
+<style is:global>
+  :root{
+    --bg:rgb(238,242,247); --ink:rgb(16,20,28); --ink2:rgb(70,80,100); --acc:rgb(31,95,214); --panel:rgb(255,255,255); --line:rgb(205,212,224);
+    --ease:cubic-bezier(.16,1,.3,1); --pop:cubic-bezier(.34,1.56,.64,1);
+    --wrap:min(1180px, 100% - clamp(40px,8vw,120px));
+  }
+  *{box-sizing:border-box; margin:0}
+  html{scrollbar-color:var(--acc) transparent; scroll-behavior:smooth}
+  body{background:var(--bg); color:var(--ink); font-family:"Schibsted Grotesk",system-ui,sans-serif; font-size:18px; line-height:1.55; -webkit-font-smoothing:antialiased}
+  ::selection{background:var(--acc); color:var(--bg)}
+  :focus-visible{outline:2px solid var(--acc); outline-offset:3px; border-radius:6px}
+  a{color:inherit; text-underline-offset:4px; text-decoration-thickness:1.5px}
+  .mono{font-family:"JetBrains Mono",monospace; font-variant-numeric:tabular-nums}
+  #sky{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0}
+  main, header{position:relative; z-index:1}
+
+  /* header + clock */
+  header{position:fixed; top:0; left:0; right:0; z-index:5; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px clamp(20px,4vw,60px); background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(10px)}
+  header .me{font-weight:800; text-decoration:none; letter-spacing:-.01em}
+  nav{display:flex; gap:clamp(14px,2vw,28px); font-size:15px; font-weight:500}
+  nav a{text-decoration:none; color:var(--ink2)} nav a:hover{color:var(--ink)}
+  .clock{display:flex; align-items:center; gap:12px; font-size:14px; color:var(--ink2)}
+  .track{position:relative; width:140px; height:24px; cursor:pointer; touch-action:none}
+  .track::before{content:""; position:absolute; left:0; right:0; top:50%; height:1.5px; background:var(--line)}
+  .knob{position:absolute; top:4px; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:var(--acc); transition:box-shadow .3s, background .3s}
+  .knob.moon{background:transparent; box-shadow:inset -5px -1px 0 0 var(--acc)}
+  .clock .t{min-width:46px; text-align:right}
+
+  section, article{position:relative}
+  .wrap{width:var(--wrap); margin-inline:auto}
+
+  /* hero */
+  .hero{min-height:100vh; display:flex; align-items:center; padding:110px 0 60px}
+  .hero .wrap{display:grid; grid-template-columns:minmax(0,1fr); max-width:1180px}
+  .hero .col{max-width:640px}
+  h1{font-size:clamp(56px,8.2vw,112px); line-height:.92; letter-spacing:-.04em; font-weight:800}
+  .role{font-size:clamp(19px,1.6vw,23px); line-height:1.45; color:var(--ink2); margin-top:22px; max-width:30ch}
+  .role b{color:var(--ink); font-weight:700}
+  .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+  .btn{display:inline-flex; align-items:center; gap:8px; height:48px; padding:0 22px; border-radius:12px; font-weight:700; font-size:16px; text-decoration:none; background:var(--ink); color:var(--bg); border:0; cursor:pointer; font-family:inherit; transition:transform .35s var(--pop), background .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.97)}
+  .btn.line{background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn.line:hover{box-shadow:inset 0 0 0 1.5px var(--ink2)}
+  .btn svg{width:14px; height:14px}
+  .bench{margin-top:46px; max-width:560px}
+  .bench h2{font-size:15px; font-weight:700; margin-bottom:10px}
+  .bench dl{display:grid; grid-template-columns:auto 1fr; column-gap:18px; row-gap:9px; font-size:16px}
+  .bench dt{color:var(--ink2); font-variant-numeric:tabular-nums; white-space:nowrap}
+  .bench dt i{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--acc); margin-right:8px; vertical-align:2px; animation:live 2.4s ease-in-out infinite}
+  .bench dt i.off{background:var(--line); animation:none}
+  @keyframes live{50%{opacity:.25}}
+
+  /* shift headings */
+  .shift{padding:clamp(90px,14vh,150px) 0 30px}
+  .shift h2{font-size:clamp(40px,5vw,68px); line-height:1; letter-spacing:-.035em; font-weight:800}
+  .shift p.lede{font-size:clamp(18px,1.4vw,21px); color:var(--ink2); margin-top:14px; max-width:46ch}
+  .night h2{font-family:"Gloock",serif; font-weight:400; letter-spacing:-.01em; font-size:clamp(48px,6vw,84px)}
+
+  /* a piece of work: text + its toy, composition varies per piece */
+  .piece{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(28px,5vw,80px); align-items:center; padding:clamp(56px,9vh,96px) 0}
+  .piece.flip .txt{order:2}
+  .piece h3{font-size:clamp(26px,2.4vw,34px); line-height:1.1; letter-spacing:-.02em; font-weight:800}
+  .night .piece h3{font-family:"Gloock",serif; font-weight:400; font-size:clamp(32px,3vw,44px); letter-spacing:0}
+  .piece p{margin-top:12px; max-width:44ch; color:var(--ink2)}
+  .piece p strong{color:var(--ink); font-weight:700}
+  .status{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:700; margin-top:16px; color:var(--ink)}
+  .status i{width:8px; height:8px; border-radius:50%; background:var(--acc)}
+  .status.done i{background:var(--ink2)}
+  .links{display:flex; flex-wrap:wrap; gap:18px; margin-top:16px; font-weight:700; font-size:16px}
+  .toy{background:var(--panel); border-radius:20px; padding:clamp(20px,2.2vw,30px); box-shadow:0 1px 0 var(--line), 0 24px 48px -30px rgba(10,20,40,.35); position:relative}
+  .toy .bar .mono{white-space:nowrap; flex:none}
+  .toy .bar{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; font-size:14px; color:var(--ink2)}
+  .small{all:unset; white-space:nowrap; cursor:pointer; font-weight:700; font-size:14px; color:var(--ink); padding:8px 14px; border-radius:10px; box-shadow:inset 0 0 0 1.5px var(--line); transition:box-shadow .2s, transform .3s var(--pop)}
+  .small:hover{box-shadow:inset 0 0 0 1.5px var(--ink2)}
+  .small:active{transform:scale(.95)}
+  .small:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+  .small.go{background:var(--ink); color:var(--bg); box-shadow:none}
+  .small[disabled]{opacity:.45; cursor:default}
+
+  /* migration toy */
+  .lanes{display:grid; gap:12px}
+  .lane{display:grid; grid-template-columns:52px 1fr; align-items:center; gap:12px; font-size:14px; color:var(--ink2)}
+  .lane .rail{height:22px; border-radius:6px; background:repeating-linear-gradient(90deg, var(--line) 0 2px, transparent 2px 9px); position:relative; overflow:hidden; cursor:pointer}
+  .lane .fill{position:absolute; inset:0; width:0; background:repeating-linear-gradient(90deg, var(--acc) 0 6px, transparent 6px 9px); border-radius:6px}
+  .tally{display:flex; align-items:end; justify-content:space-between; margin-top:20px}
+  .tally b{font-size:clamp(34px,3.2vw,46px); font-weight:800; letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1}
+  .tally small{display:block; color:var(--ink2); font-size:14px; margin-top:4px}
+  .stamp{font-weight:800; font-size:14px; letter-spacing:.04em; color:var(--acc); border:2px solid var(--acc); border-radius:8px; padding:6px 10px; transform:rotate(-6deg) scale(.6); opacity:0; transition:transform .45s var(--pop), opacity .2s}
+  .stamp.on{transform:rotate(-6deg) scale(1); opacity:1}
+
+  /* meter workshop toy */
+  .scan{display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:start}
+  .barcode{height:96px; border-radius:10px; background:var(--bg); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center}
+  .barcode svg{width:118px; height:64px}
+  .barcode .beam{position:absolute; left:8px; right:8px; height:2px; background:var(--acc); top:50%; opacity:0}
+  .barcode.hit .beam{animation:beam .45s var(--ease)}
+  @keyframes beam{0%{opacity:1; top:12%}100%{opacity:0; top:88%}}
+  .batch{list-style:none; padding:0; display:grid; gap:6px; min-height:186px; align-content:start}
+  .batch li{display:flex; justify-content:space-between; gap:10px; font-size:14px; padding:7px 10px; border-radius:8px; background:var(--bg); animation:slot .4s var(--pop)}
+  .batch li.dup{background:transparent; box-shadow:inset 0 0 0 1.5px var(--acc); color:var(--ink)}
+  .batch li span:last-child{color:var(--ink2)}
+  .batch li .mono{white-space:nowrap}
+  .batch .empty{color:var(--ink2); font-size:14px; background:none; animation:none; padding-left:0}
+  @keyframes slot{from{transform:translateY(-8px); opacity:0}}
+  .scanbar{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; align-items:center}
+  .scanbar .msg{font-size:14px; color:var(--ink2)}
+
+  /* valet toy */
+  .term{font-family:"JetBrains Mono",monospace; font-size:14px; line-height:1.7; min-height:220px}
+  .term .who{color:var(--ink2)}
+  .term .red{color:var(--acc); font-weight:600}
+  .term > div{animation:slot .35s var(--ease)}
+  .ask{margin:10px 0; padding:12px 14px; border-radius:12px; background:var(--bg); font-family:"Schibsted Grotesk",sans-serif; font-size:15px}
+  .ask .row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+  .ask .small{white-space:normal}
+
+  /* kanz pipeline toy */
+  .pipe{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; position:relative; margin-top:6px}
+  .stn{border-radius:12px; padding:42px 10px 12px; text-align:center; font-size:14px; color:var(--ink2); background:var(--bg); transition:color .3s, box-shadow .3s}
+  .stn.lit{color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--acc)}
+  .stn b{display:block; color:inherit; font-size:15px}
+  .lyric{position:absolute; top:8px; left:0; width:calc((100% - 24px) / 4); display:flex; justify-content:center; transition:transform .7s var(--ease); pointer-events:none}
+  .lyric span{background:var(--acc); color:var(--bg); font-size:12px; font-weight:700; padding:5px 10px; border-radius:6px; white-space:nowrap}
+  .seg{display:inline-flex; border-radius:10px; box-shadow:inset 0 0 0 1.5px var(--line); padding:3px}
+  .seg button{all:unset; white-space:nowrap; cursor:pointer; font-size:13px; font-weight:700; padding:7px 12px; border-radius:7px; color:var(--ink2)}
+  .seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+  .seg button:focus-visible{outline:2px solid var(--acc)}
+
+  /* wireguard toy */
+  .tun{display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:center}
+  .switch{all:unset; cursor:pointer; width:72px; height:40px; border-radius:999px; background:var(--line); position:relative; transition:background .3s}
+  .switch::after{content:""; position:absolute; top:5px; left:5px; width:30px; height:30px; border-radius:50%; background:var(--bg); transition:transform .4s var(--pop)}
+  .switch[aria-checked="true"]{background:var(--acc)}
+  .switch[aria-checked="true"]::after{transform:translateX(32px)}
+  .switch:focus-visible{outline:2px solid var(--acc); outline-offset:3px}
+  .tun .state{font-weight:700}
+  .tun .state small{display:block; font-weight:400; color:var(--ink2); font-size:14px}
+  .qr{width:132px; height:132px; margin-top:18px; border-radius:10px; background:var(--bg); padding:10px; opacity:.25; transition:opacity .4s}
+  .qr.on{opacity:1}
+  .qr svg{width:100%; height:100%; display:block}
+
+  /* dusk band */
+  .dusk{min-height:120vh; display:flex; align-items:center}
+  .dusk p{font-family:"Gloock",serif; font-size:clamp(38px,5vw,72px); line-height:1.12; max-width:16ch}
+
+  /* contact */
+  .contact{min-height:90vh; display:flex; align-items:center; padding:120px 0 80px}
+  .contact h2{font-size:clamp(44px,6vw,84px); line-height:.98; letter-spacing:-.04em; font-weight:800; max-width:12ch}
+  .contact p{color:var(--ink2); margin-top:16px; max-width:46ch}
+  .foot{margin-top:56px; font-size:14px; color:var(--ink2); display:flex; flex-wrap:wrap; gap:8px 28px}
+
+  @media (max-width:860px){
+    nav a:not([href="#contact"]){display:none}
+    .piece{grid-template-columns:minmax(0,1fr)} .piece.flip .txt{order:0}
+    .scan{grid-template-columns:minmax(0,1fr)} .barcode{height:80px}
+    .pipe{grid-template-columns:repeat(2,minmax(0,1fr))} .lyric{display:none}
+    .track{width:90px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none !important; transition:none !important}
+  }
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header>
+  <a class="me" href="#top">Mir Husain Ali</a>
+  <nav aria-label="Sections"><a href="#day">Client work</a><a href="#night">Own tools</a><a href="#contact">Contact</a></nav>
+  <div class="clock">
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Time of day: drag to move through the page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="knob" id="knob"></span></div>
+    <span class="t mono" id="time">08:00</span>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" data-sky="0">
+    <div class="wrap"><div class="col">
+      <h1>Mir Husain<br>Ali</h1>
+      <p class="role">I build and run <b>Dynamics 365 CE</b> systems for clients by day, and my own tools after hours. Data migration, platform and DevOps.</p>
+      <div class="cta">
+        <a class="btn" href={mailto}>Email Mir</a>
+        <a class="btn line" href="https://github.com/The-Tech-Boi">GitHub</a>
+        <a class="btn line" href="https://www.linkedin.com/in/mir-husain-ali-mohammed">LinkedIn</a>
+      </div>
+      <div class="bench">
+        <h2>On the bench now</h2>
+        <dl>
+          <dt><i></i>Nov 2026</dt><dd>valet, rewritten in Rust: one Windows exe, now with its own logo.</dd>
+          <dt><i></i>Nov 2026</dt><dd>Meter workshop app: barcode capture and duplicate checks.</dd>
+          <dt><i></i>Nov 2026</dt><dd>Kanz e Aza: stanzas stay whole on shared lyric pages.</dd>
+          <dt><i class="off"></i>Jul 2026</dt><dd>Four-org Dynamics 365 CE migration went live.</dd>
+        </dl>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="shift" id="day" data-sky="0">
+    <div class="wrap">
+      <h2>Day shift</h2>
+      <p class="lede">Client systems on Dynamics 365 CE. Big data, real users, and nothing allowed to go missing.</p>
+
+      <article class="piece" data-sky="0">
+        <div class="txt">
+          <h3>Four orgs, one clean move</h3>
+          <p>At Async Solution I migrated four Dynamics 365 CE orgs: <strong>1.5M+ accounts</strong> and <strong>3.9M+ records</strong>, live in July 2026. I also look after the platform and the release pipelines around it.</p>
+          <span class="status done"><i></i>Done, live since July 2026</span>
+        </div>
+        <div class="toy" id="mig">
+          <div class="bar"><span>Click a lane to replay it</span><button class="small go" type="button" id="migGo">Replay the migration</button></div>
+          <div class="lanes">
+            <div class="lane"><span>Org 1</span><div class="rail" data-l="0"><div class="fill"></div></div></div>
+            <div class="lane"><span>Org 2</span><div class="rail" data-l="1"><div class="fill"></div></div></div>
+            <div class="lane"><span>Org 3</span><div class="rail" data-l="2"><div class="fill"></div></div></div>
+            <div class="lane"><span>Org 4</span><div class="rail" data-l="3"><div class="fill"></div></div></div>
+          </div>
+          <div class="tally"><div><b id="migN">0</b><small>records moved</small></div><span class="stamp" id="migStamp">LIVE JUL 2026</span></div>
+        </div>
+      </article>
+
+      <article class="piece flip" data-sky="0">
+        <div class="txt">
+          <h3>Meter workshop app</h3>
+          <p>A desktop app for a utility's meter workshop. Operators build a batch from a template, scan meters with a barcode scanner, and the app checks every meter, including duplicates, before filing the batch in Dynamics 365.</p>
+          <span class="status"><i></i>Building now</span>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>Try it: scan a few meters, then file the batch</span><span class="mono" id="batchN">0 / 8</span></div>
+          <div class="scan">
+            <div class="barcode" id="code"><svg viewBox="0 0 118 64" aria-hidden="true" id="bars"></svg><span class="beam"></span></div>
+            <ul class="batch" id="batch" aria-live="polite"><li class="empty">Batch is empty. Scan a meter.</li></ul>
+          </div>
+          <div class="scanbar">
+            <button class="small go" type="button" id="scanBtn">Scan a meter</button>
+            <button class="small" type="button" id="fileBtn" disabled>File the batch</button>
+            <span class="msg" id="scanMsg">Press S to scan</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="dusk" data-sky="1">
+    <div class="wrap"><p>After hours, I build my own tools.</p></div>
+  </section>
+
+  <section class="shift night" id="night" data-sky="2">
+    <div data-sky="2" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2>Night shift</h2>
+      <p class="lede">Things I build because I want them to exist. Open source where I can.</p>
+
+      <article class="piece" data-sky="2">
+        <div class="txt">
+          <h3>valet</h3>
+          <p>valet lets scripts and AI coding assistants <strong>use</strong> a password or token from your vault without ever seeing it, the way an SSH agent signs for you without handing over the key. Approval, redaction and an audit line on every use. One Windows exe, written in Rust.</p>
+          <span class="status"><i></i>Building now</span>
+          <div class="links"><a href="https://github.com/The-Tech-Boi/valet">valet on GitHub</a></div>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>An assistant asks valet for help</span><button class="small" type="button" id="vReset">Start over</button></div>
+          <div class="term" id="term" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <article class="piece flip" data-sky="2">
+        <div class="txt">
+          <h3>Kanz e Aza</h3>
+          <p>A publishing pipeline that keeps lyrics for the long term, in English and Roman Urdu script. Every lyric is reviewed by a person, published to an app and a website, and kept in an open dataset with its full history.</p>
+          <span class="status"><i></i>Running, always improving</span>
+          <div class="links"><a href="https://kanz-e-aza.com">kanz-e-aza.com</a><a href="https://github.com/The-Tech-Boi/Kanz-e-Aza-Lyrics">The open dataset</a></div>
+        </div>
+        <div class="toy">
+          <div class="bar">
+            <div class="seg" role="group" aria-label="Script"><button type="button" aria-pressed="true" data-s="English">English</button><button type="button" aria-pressed="false" data-s="Roman Urdu">Roman Urdu</button></div>
+            <button class="small go" type="button" id="kGo">Publish a lyric</button>
+          </div>
+          <div class="pipe" id="pipe">
+            <div class="lyric" id="lyric"><span>Lyric, English</span></div>
+            <div class="stn"><b>Submitted</b>typed in</div>
+            <div class="stn"><b>Reviewed</b>by a person</div>
+            <div class="stn"><b>Published</b>app and web</div>
+            <div class="stn"><b>Kept</b>open dataset</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece" data-sky="2">
+        <div class="txt">
+          <h3>WireGuard Manager for Windows</h3>
+          <p>A friendly Windows app for managing WireGuard peers, with QR codes so adding a phone takes one scan.</p>
+          <span class="status done"><i></i>Shipped</span>
+          <div class="links"><a href="https://github.com/The-Tech-Boi/WG_UI_4_Windows">WG_UI_4_Windows on GitHub</a></div>
+        </div>
+        <div class="toy">
+          <div class="tun">
+            <button class="switch" type="button" role="switch" aria-checked="false" id="tun" aria-label="Tunnel"></button>
+            <div class="state" id="tunState">Tunnel down<small>Flip it to bring a peer up</small></div>
+          </div>
+          <div class="qr" id="qr"><svg viewBox="0 0 25 25" shape-rendering="crispEdges" aria-label="Sample peer QR code" role="img" id="qrSvg"></svg></div>
+        </div>
+      </article>
+    </div>
+    <div data-sky="2" aria-hidden="true"></div>
+  </section>
+
+  <section class="contact" id="contact" data-sky="3">
+    <div data-sky="3" aria-hidden="true" style="position:absolute; top:12%"></div>
+    <div class="wrap">
+      <h2>The next shift starts with your email.</h2>
+      <p>Hiring, or have a system that needs moving or building? Email works best.</p>
+      <div class="cta">
+        <a class="btn" href={mailto}>Email Mir</a>
+        <a class="btn line" href="https://github.com/The-Tech-Boi">GitHub</a>
+        <a class="btn line" href="https://www.linkedin.com/in/mir-husain-ali-mohammed">LinkedIn</a>
+      </div>
+      <div class="foot"><span>Mir Husain Ali Mohammed</span><span>BCA, Amity University, expected 2027</span></div>
+    </div>
+  </section>
+</main>
+
+<script is:inline>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), root = document.documentElement;
+
+  /* ---------- sky: palettes blended by scroll ---------- */
+  const SKY = [
+    {bg:[238,242,247], ink:[16,20,28],   ink2:[70,80,100],  acc:[31,95,214],  panel:[255,255,255], line:[205,212,224]}, // day
+    {bg:[233,158,118], ink:[28,18,30],   ink2:[74,44,52],   acc:[140,40,60],  panel:[246,196,166], line:[200,120,96]},  // dusk
+    {bg:[11,20,48],    ink:[241,234,216],ink2:[170,179,204],acc:[226,176,74], panel:[20,32,70],    line:[44,60,104]},   // night
+    {bg:[226,228,244], ink:[20,20,40],   ink2:[80,80,110],  acc:[196,90,120], panel:[255,255,255], line:[200,200,224]}  // dawn
+  ];
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const sm = t => t * t * (3 - 2 * t);
+  let marks = [], s = 0, H = innerHeight, W = innerWidth;
+  function measure(){
+    H = innerHeight; W = innerWidth;
+    marks = [...document.querySelectorAll('[data-sky]')].map(el => { const r = el.getBoundingClientRect(); return {mid: r.top + scrollY + r.height / 2, sky: +el.dataset.sky}; }).sort((a, b) => a.mid - b.mid);
+  }
+  function skyAt(){
+    const c = scrollY + H / 2;
+    if (c <= marks[0].mid) return marks[0].sky;
+    for (let i = 0; i < marks.length - 1; i++){
+      const a = marks[i], b = marks[i + 1];
+      if (c < b.mid) return a.sky + (b.sky - a.sky) * sm((c - a.mid) / (b.mid - a.mid));
+    }
+    return marks[marks.length - 1].sky;
+  }
+  function paint(){
+    s = skyAt();
+    const i = Math.min(2, Math.floor(s)), f = s - i, A = SKY[i], B = SKY[i + 1];
+    const bg = mix(A.bg, B.bg, f);
+    const lum = c => { const [r, g, b] = c.map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * r + .7152 * g + .0722 * b; };
+    const light = lum(bg) > .18, src = (lum(A.bg) > lum(B.bg)) === light ? A : B;
+    root.style.setProperty('--bg', 'rgb(' + bg.join(',') + ')');
+    root.style.setProperty('--acc', 'rgb(' + mix(A.acc, B.acc, f).join(',') + ')');
+    const cr = (x, y) => { const a = lum(x) + .05, b = lum(y) + .05; return Math.max(a, b) / Math.min(a, b); };
+    for (const k of ['ink','line','panel']) root.style.setProperty('--' + k, 'rgb(' + src[k].join(',') + ')');
+    root.style.setProperty('--ink2', 'rgb(' + (cr(src.ink2, bg) >= 4.5 ? src.ink2 : src.ink).join(',') + ')');
+    clock();
+  }
+
+  /* ---------- clock in the header ---------- */
+  const track = $('#track'), knob = $('#knob'), timeEl = $('#time');
+  const MIN = [8 * 60, 18.5 * 60, 23 * 60, 29.75 * 60];
+  function clock(){
+    const max = document.documentElement.scrollHeight - H, p = max > 0 ? scrollY / max : 0;
+    knob.style.left = (p * 100) + '%'; track.setAttribute('aria-valuenow', Math.round(p * 100));
+    const i = Math.min(2, Math.floor(s)), m = (MIN[i] + (MIN[i + 1] - MIN[i]) * (s - i)) % 1440;
+    timeEl.textContent = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0');
+    knob.classList.toggle('moon', s > 1.4 && s < 2.6);
+  }
+  const seek = x => { const r = track.getBoundingClientRect(), p = Math.max(0, Math.min(1, (x - r.left) / r.width)); scrollTo({top: p * (document.documentElement.scrollHeight - H), behavior:'instant'}); };
+  track.addEventListener('pointerdown', e => { track.setPointerCapture(e.pointerId); seek(e.clientX); track.onpointermove = ev => seek(ev.clientX); });
+  track.addEventListener('pointerup', () => { track.onpointermove = null; });
+  track.addEventListener('keydown', e => {
+    const step = (document.documentElement.scrollHeight - H) / 20;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp'){ scrollBy({top: step}); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown'){ scrollBy({top: -step}); e.preventDefault(); }
+  });
+
+  /* ---------- records by day, stars by night ---------- */
+  const cv = $('#sky'), cx = cv.getContext('2d');
+  let P = [], shoot = [];
+  function seed(){
+    const dpr = devicePixelRatio || 1; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const rows = W < 860 ? 12 : 22, per = W < 860 ? 8 : 10; P = [];
+    for (let r = 0; r < rows; r++) for (let k = 0; k < per; k++)
+      P.push({r, k, per, rows, sp: .012 + ((r * 7) % 5) * .006, d: Math.random(), sx: Math.random(), sy: Math.random() * .92, sz: .6 + Math.random() * 1.4, tw: 1 + Math.random() * 2, ph: Math.random() * 7, live: Math.random() < .08, gold: Math.random() < .12});
+  }
+  function dayPos(p, t){
+    const narrow = W < 860, x0 = W * (narrow ? .06 : .55), x1 = W * (narrow ? .94 : .95), y0 = H * (narrow ? .62 : .2), y1 = H * (narrow ? .92 : .86);
+    const u = ((p.k / p.per) + t * p.sp) % 1;
+    return [x0 + u * (x1 - x0), y0 + (p.r / (p.rows - 1)) * (y1 - y0)];
+  }
+  function frame(now){
+    const t = reduce ? 0 : now / 1000;
+    cx.clearRect(0, 0, W, H);
+    const m = sm(Math.max(0, Math.min(1, (s - .45) / 1.1)));
+    const heroFade = W < 860 ? .16 : Math.max(.16, 1 - scrollY / (H * .9));
+    const dawnFade = s > 2 ? 1 - (s - 2) * .85 : 1;
+    const ink2 = getComputedStyle(root).getPropertyValue('--ink2'), acc = getComputedStyle(root).getPropertyValue('--acc');
+    for (const p of P){
+      const mp = Math.max(0, Math.min(1, m * 1.5 - p.d * .5)), e = sm(mp);
+      const [dx, dy] = dayPos(p, t), nx = p.sx * W, ny = p.sy * H;
+      const x = dx + (nx - dx) * e, y = dy + (ny - dy) * e - Math.sin(mp * Math.PI) * H * .12;
+      const dayA = (p.live ? .9 : .5) * heroFade, nightA = (.55 + .45 * Math.sin(t * p.tw + p.ph)) * dawnFade;
+      cx.globalAlpha = dayA + (nightA - dayA) * e;
+      if (e < .6){
+        cx.fillStyle = p.live ? acc : ink2;
+        const w = 18 + (2 - 18) * e / .6, h = 4 + (2 - 4) * e / .6;
+        cx.fillRect(x - w / 2, y - h / 2, w, h);
+      } else {
+        cx.fillStyle = p.gold ? 'rgb(226,176,74)' : 'rgb(241,234,216)';
+        cx.beginPath(); cx.arc(x, y, p.sz, 0, 7); cx.fill();
+      }
+    }
+    cx.globalAlpha = 1;
+    shoot = shoot.filter(q => (q.t += .016) < 1);
+    for (const q of shoot){
+      const x = q.x + q.vx * q.t, y = q.y + q.vy * q.t, g = cx.createLinearGradient(x, y, x - q.vx * .25, y - q.vy * .25);
+      g.addColorStop(0, 'rgba(241,234,216,' + (1 - q.t) + ')'); g.addColorStop(1, 'rgba(241,234,216,0)');
+      cx.strokeStyle = g; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x - q.vx * .25, y - q.vy * .25); cx.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener('click', e => {
+    if (reduce || s < 1.5 || s > 2.5 || e.target.closest('a,button,.toy,[role]')) return;
+    shoot.push({x: e.clientX, y: e.clientY, vx: -260 - Math.random() * 140, vy: 160 + Math.random() * 80, t: 0});
+  });
+
+  /* ---------- migration toy ---------- */
+  const fills = [...document.querySelectorAll('#mig .fill')], migN = $('#migN'), stamp = $('#migStamp');
+  const SHARE = [.31, .27, .24, .18], TOTAL = 3900000;
+  let done = [0, 0, 0, 0];
+  function runLane(i, delay){
+    return new Promise(res => {
+      const start = performance.now() + delay, dur = reduce ? 0 : 1300 + i * 200;
+      (function f(now){
+        const p = dur ? Math.max(0, Math.min(1, (now - start) / dur)) : 1, e = 1 - Math.pow(1 - p, 3);
+        fills[i].style.width = (e * 100) + '%'; done[i] = e;
+        migN.textContent = Math.round(done.reduce((a, d, k) => a + d * SHARE[k], 0) * TOTAL).toLocaleString('en-US') + (done.every(d => d >= 1) ? '+' : '');
+        if (p < 1) requestAnimationFrame(f); else res();
+      })(performance.now());
+    });
+  }
+  function migrate(){
+    stamp.classList.remove('on'); done = [0, 0, 0, 0]; fills.forEach(f => f.style.width = 0);
+    Promise.all(fills.map((_, i) => runLane(i, i * 260))).then(() => stamp.classList.add('on'));
+  }
+  $('#migGo').addEventListener('click', migrate);
+  document.querySelectorAll('#mig .rail').forEach(r => r.addEventListener('click', () => { const i = +r.dataset.l; stamp.classList.remove('on'); runLane(i, 0).then(() => { if (done.every(d => d >= 1)) stamp.classList.add('on'); }); }));
+  new IntersectionObserver((en, o) => { if (en[0].isIntersecting){ migrate(); o.disconnect(); } }, {threshold:.5}).observe($('#mig'));
+
+  /* ---------- meter workshop toy ---------- */
+  const POOL = ['MTR-0410-2281', 'MTR-0410-2282', 'MTR-0410-2290', 'MTR-0410-2304', 'MTR-0410-2317', 'MTR-0410-2333', 'MTR-0410-2341'];
+  const batch = $('#batch'), msg = $('#scanMsg'), fileBtn = $('#fileBtn'), code = $('#code'), batchN = $('#batchN');
+  let inBatch = [];
+  function drawBars(){
+    let x = 2, h = ''; while (x < 114){ const w = 1 + ((Math.random() * 3) | 0); h += `<rect x="${x}" y="0" width="${w}" height="64" fill="currentColor"/>`; x += w + 1 + ((Math.random() * 3) | 0); }
+    $('#bars').innerHTML = h;
+  }
+  function scan(){
+    if (inBatch.length >= 8){ msg.textContent = 'Batch is full. File it first.'; return; }
+    const sn = POOL[(Math.random() * POOL.length) | 0];
+    drawBars(); code.classList.remove('hit'); void code.offsetWidth; code.classList.add('hit');
+    batch.querySelector('.empty')?.remove();
+    const li = document.createElement('li');
+    if (inBatch.includes(sn)){
+      li.className = 'dup'; li.innerHTML = `<span class="mono">${sn}</span><span>duplicate, skipped</span>`;
+      msg.textContent = 'Duplicate caught.';
+      batch.prepend(li); setTimeout(() => li.remove(), 2200); return;
+    }
+    inBatch.push(sn); li.innerHTML = `<span class="mono">${sn}</span><span>checked</span>`;
+    batch.prepend(li); while (batch.children.length > 6) batch.lastChild.remove();
+    batchN.textContent = inBatch.length + ' / 8'; fileBtn.disabled = false; msg.textContent = 'Meter checked.';
+  }
+  $('#scanBtn').addEventListener('click', scan);
+  addEventListener('keydown', e => { if (e.key.toLowerCase() === 's' && !e.target.closest('input,textarea,[contenteditable]') && !e.ctrlKey && !e.metaKey){ const r = code.getBoundingClientRect(); if (r.top < H && r.bottom > 0) scan(); } });
+  fileBtn.addEventListener('click', () => {
+    msg.textContent = `Batch of ${inBatch.length} filed in Dynamics 365.`;
+    inBatch = []; batchN.textContent = '0 / 8'; fileBtn.disabled = true;
+    batch.innerHTML = '<li class="empty">Filed. Scan a meter to start the next batch.</li>';
+  });
+  drawBars();
+
+  /* ---------- valet toy ---------- */
+  const term = $('#term');
+  const line = (who, html) => { const d = document.createElement('div'); d.innerHTML = `<span class="who">${who}</span> ${html}`; term.appendChild(d); return d; };
+  function valetStart(){
+    term.innerHTML = '';
+    line('assistant:', 'GET /api/accounts using <b>CRM API</b>');
+    const a = document.createElement('div'); a.className = 'ask';
+    a.innerHTML = 'Allow the assistant to use <b>CRM API</b> for this request?<div class="row"><button class="small go" type="button" data-v="allow">Allow</button><button class="small" type="button" data-v="deny">Deny</button><button class="small" type="button" data-v="peek">Ask for the password instead</button></div>';
+    term.appendChild(a);
+    a.addEventListener('click', e => {
+      const v = e.target.dataset?.v; if (!v) return;
+      if (v === 'peek'){ line('assistant:', 'just give me the password'); line('valet:', 'You can use it. You can\'t have it.'); return; }
+      a.remove();
+      if (v === 'deny'){ line('valet:', 'denied. Nothing was sent.'); return; }
+      line('valet:', 'signed in, request sent');
+      setTimeout(() => line('result:', '200 OK, Authorization: <span class="red">[REDACTED:CRM API]</span>'), reduce ? 0 : 450);
+      setTimeout(() => line('audit:', 'one line written'), reduce ? 0 : 900);
+    });
+  }
+  $('#vReset').addEventListener('click', valetStart); valetStart();
+
+  /* ---------- kanz pipeline toy ---------- */
+  const lyric = $('#lyric'), stns = [...document.querySelectorAll('.stn')];
+  let script = 'English', running = false;
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    script = b.dataset.s; lyric.firstElementChild.textContent = 'Lyric, ' + script;
+  }));
+  $('#kGo').addEventListener('click', async () => {
+    if (running) return; running = true; stns.forEach(s => s.classList.remove('lit'));
+    for (let i = 0; i < 4; i++){
+      lyric.style.transform = `translateX(calc(${i} * (100% + 8px)))`; stns[i].classList.add('lit');
+      await new Promise(r => setTimeout(r, reduce ? 0 : 750));
+    }
+    running = false;
+  });
+
+  /* ---------- wireguard toy ---------- */
+  const tun = $('#tun'), qr = $('#qr');
+  (function drawQR(){
+    let h = ''; const fin = (x, y) => h += `<rect x="${x}" y="${y}" width="7" height="7" fill="currentColor"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="var(--bg)"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="currentColor"/>`;
+    for (let y = 0; y < 25; y++) for (let x = 0; x < 25; x++){
+      if ((x < 8 && y < 8) || (x > 16 && y < 8) || (x < 8 && y > 16)) continue;
+      if (((x * 7 + y * 13 + x * y) % 5) < 2) h += `<rect x="${x}" y="${y}" width="1" height="1" fill="currentColor"/>`;
+    }
+    fin(0, 0); fin(18, 0); fin(0, 18); $('#qrSvg').innerHTML = h;
+  })();
+  tun.addEventListener('click', () => {
+    const on = tun.getAttribute('aria-checked') !== 'true'; tun.setAttribute('aria-checked', on); qr.classList.toggle('on', on);
+    $('#tunState').innerHTML = on ? 'Tunnel up<small>Scan the code to add a phone</small>' : 'Tunnel down<small>Flip it to bring a peer up</small>';
+  });
+
+  /* ---------- boot ---------- */
+  addEventListener('scroll', paint, {passive:true});
+  addEventListener('resize', () => { measure(); seed(); paint(); });
+  document.fonts.ready.then(() => { measure(); seed(); paint(); requestAnimationFrame(frame); });
+})();
+</script>
+</body>
+</html>
