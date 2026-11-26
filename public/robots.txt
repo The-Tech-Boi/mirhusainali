@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mirhusainali.pages.dev/sitemap-index.xml
+Sitemap: https://mirhusainali.mirhusainalimohammed.workers.dev/sitemap-index.xml
