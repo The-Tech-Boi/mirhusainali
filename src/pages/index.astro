@@ -417,6 +417,7 @@ const person = {
     knob.style.left = (p * 100) + '%'; track.setAttribute('aria-valuenow', Math.round(p * 100));
     const i = Math.min(2, Math.floor(s)), m = (MIN[i] + (MIN[i + 1] - MIN[i]) * (s - i)) % 1440;
     timeEl.textContent = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0');
+    track.setAttribute('aria-valuetext', timeEl.textContent);
     knob.classList.toggle('moon', s > 1.4 && s < 2.6);
   }
   const seek = x => { const r = track.getBoundingClientRect(), p = Math.max(0, Math.min(1, (x - r.left) / r.width)); scrollTo({top: p * (document.documentElement.scrollHeight - H), behavior:'instant'}); };
@@ -426,13 +427,17 @@ const person = {
     const step = (document.documentElement.scrollHeight - H) / 20;
     if (e.key === 'ArrowRight' || e.key === 'ArrowUp'){ scrollBy({top: step}); e.preventDefault(); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown'){ scrollBy({top: -step}); e.preventDefault(); }
+    if (e.key === 'Home'){ scrollTo({top: 0}); e.preventDefault(); }
+    if (e.key === 'End'){ scrollTo({top: document.documentElement.scrollHeight}); e.preventDefault(); }
   });
 
   /* ---------- records by day, stars by night ---------- */
   const cv = $('#sky'), cx = cv.getContext('2d');
   let P = [], shoot = [];
+  let seededW = 0;
+  function size(){ const dpr = devicePixelRatio || 1; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
   function seed(){
-    const dpr = devicePixelRatio || 1; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    size(); seededW = W;
     const rows = W < 860 ? 12 : 22, per = W < 860 ? 8 : 10; P = [];
     for (let r = 0; r < rows; r++) for (let k = 0; k < per; k++)
       P.push({r, k, per, rows, sp: .012 + ((r * 7) % 5) * .006, d: Math.random(), sx: Math.random(), sy: Math.random() * .92, sz: .6 + Math.random() * 1.4, tw: 1 + Math.random() * 2, ph: Math.random() * 7, live: Math.random() < .08, gold: Math.random() < .12});
@@ -587,7 +592,8 @@ const person = {
 
   /* ---------- boot ---------- */
   addEventListener('scroll', paint, {passive:true});
-  addEventListener('resize', () => { measure(); seed(); paint(); });
+  // Mobile toolbars change only the height; keep the stars where they are then.
+  addEventListener('resize', () => { measure(); if (W !== seededW) seed(); else size(); paint(); });
   document.fonts.ready.then(() => { measure(); seed(); paint(); requestAnimationFrame(frame); });
 })();
 </script>
