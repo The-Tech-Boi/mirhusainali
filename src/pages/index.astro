@@ -7,6 +7,7 @@ import '@fontsource/gloock/400.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
 import '@fontsource/gulzar/arabic-400.css';
+import headlineFont from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-latin-800-normal.woff2?url';
 
 const EMAIL = 'mirhusainalimohammed@gmail.com';
 const mailto = `mailto:${EMAIL}`;
@@ -41,7 +42,7 @@ const graph = {
       '@type': 'Person',
       '@id': site + '#person',
       name,
-      alternateName: 'Mir Husain Ali Mohammed',
+      alternateName: ['Mir Husain Ali Mohammed', 'Mir Hussain Ali'],
       url: site,
       image,
       email: 'mailto:mirhusainalimohammed@gmail.com',
@@ -56,7 +57,6 @@ const graph = {
       sameAs: [
         'https://www.linkedin.com/in/mir-husain-ali-mohammed',
         'https://github.com/The-Tech-Boi',
-        'https://kanz-e-aza.com',
       ],
     },
   ],
@@ -70,6 +70,7 @@ const graph = {
 <title>{title}</title>
 <meta name="description" content={description}>
 <link rel="canonical" href={site}>
+<link rel="preload" href={headlineFont} as="font" type="font/woff2" crossorigin>
 <meta name="author" content={name}>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -305,8 +306,8 @@ const graph = {
 <main id="top">
   <section class="hero" data-sky="0">
     <div class="wrap"><div class="col">
-      <h1>Mir Husain<br>Ali</h1>
-      <p class="role">I build and run <b>Dynamics 365 CE</b> systems for clients by day, and my own tools after hours. Data migration, platform and DevOps.</p>
+      <h1>Mir Husain <br>Ali</h1>
+      <p class="role"><b>Dynamics 365 CE</b> and data migration engineer at Async Solution. I build and run client systems by day, and my own tools after hours. Platform and DevOps too.</p>
       <div class="cta">
         <a class="btn" href={mailto}>Email Mir</a>
         <a class="btn line" href="https://github.com/The-Tech-Boi">GitHub</a>
@@ -434,7 +435,7 @@ const graph = {
     <div data-sky="2" aria-hidden="true"></div>
     <div class="wrap">
       <h2>Night shift</h2>
-      <p class="lede">Things I build because I want them to exist. Open source where I can.</p>
+      <p class="lede">Tools and apps I build because I want them to exist, in Rust, Flutter and the web. Open source where I can.</p>
 
       <article class="piece" data-sky="2">
         <div class="txt">
@@ -609,7 +610,7 @@ const graph = {
     const m = sm(Math.max(0, Math.min(1, (s - .45) / 1.1)));
     const heroFade = W < 860 ? .16 : Math.max(.16, 1 - scrollY / (H * .9));
     const dawnFade = s > 2 ? 1 - (s - 2) * .85 : 1;
-    const ink2 = getComputedStyle(root).getPropertyValue('--ink2'), acc = getComputedStyle(root).getPropertyValue('--acc');
+    const ink2 = root.style.getPropertyValue('--ink2'), acc = root.style.getPropertyValue('--acc');
     for (const p of P){
       const mp = Math.max(0, Math.min(1, m * 1.5 - p.d * .5)), e = sm(mp);
       const [dx, dy] = dayPos(p, t), nx = p.sx * W, ny = p.sy * H;
@@ -632,7 +633,8 @@ const graph = {
       g.addColorStop(0, 'rgba(241,234,216,' + (1 - q.t) + ')'); g.addColorStop(1, 'rgba(241,234,216,0)');
       cx.strokeStyle = g; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x - q.vx * .25, y - q.vy * .25); cx.stroke();
     }
-    requestAnimationFrame(frame);
+    // With reduced motion the sky is still; redraw only when scrolling or resizing.
+    if (!reduce) requestAnimationFrame(frame);
   }
   addEventListener('click', e => {
     if (reduce || s < 1.5 || s > 2.5 || e.target.closest('a,button,.toy,[role]')) return;
@@ -828,8 +830,9 @@ const graph = {
 
   /* ---------- boot ---------- */
   addEventListener('scroll', paint, {passive:true});
+  if (reduce) addEventListener('scroll', () => requestAnimationFrame(frame), {passive:true});
   // Mobile toolbars change only the height; keep the stars where they are then.
-  addEventListener('resize', () => { measure(); if (W !== seededW) seed(); else size(); paint(); });
+  addEventListener('resize', () => { measure(); if (W !== seededW) seed(); else size(); paint(); if (reduce) requestAnimationFrame(frame); });
   document.fonts.ready.then(() => { measure(); seed(); paint(); requestAnimationFrame(frame); });
 })();
 </script>
