@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// When mirhusainali.com is attached, change this to 'https://mirhusainali.com'.
+// The live domain. The workers.dev address still works as a fallback.
 export default defineConfig({
-  site: 'https://mirhusainali.mirhusainalimohammed.workers.dev',
+  site: 'https://mirhusainali.com',
   integrations: [sitemap()],
 });
