@@ -236,7 +236,7 @@ Ringed 10px track with 3px padding; pressed option fills with ink, others sit in
 Wrapping row of 13px/700 chips, each with its own Hairline ring and 8px radius; the pressed chip fills with ink. Used where options are too many or too long for a segmented control (portal services, who is signing in).
 
 ### Event feed
-A list of ground-coloured 8px rows, label left and outcome right in Slate, that arrive one at a time on the pop spring. The latest row is ringed in `--acc` because it is the live one. Shared by the portal, team access and meter toys.
+A list of ground-coloured 8px rows, label left and outcome right in Slate, that arrive one at a time on the pop spring. The latest row is ringed in `--acc` because it is the live one. Used by the portal and team access toys; the meter batch list uses the same row look.
 
 ### Runbook steps
 A 3-column grid (2 at 860px and below) of ground tiles with a bold step name over a short note. The running step is ringed in `--acc`; finished steps turn ink and gain a check.
