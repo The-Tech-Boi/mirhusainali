@@ -6,12 +6,13 @@ import '@fontsource/schibsted-grotesk/800.css';
 import '@fontsource/gloock/400.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
+import '@fontsource/gulzar/arabic-400.css';
 
 const EMAIL = 'mirhusainalimohammed@gmail.com';
 const mailto = `mailto:${EMAIL}`;
 const site = Astro.site?.href ?? 'https://mirhusainali.mirhusainalimohammed.workers.dev/';
 const title = 'Mir Husain Ali';
-const description = 'Mir Husain Ali builds and runs Dynamics 365 CE systems for clients by day and his own tools after hours: valet, Kanz e Aza and WireGuard Manager.';
+const description = 'Mir Husain Ali builds and runs Dynamics 365 CE systems for clients by day and his own tools after hours: valet, Kanz e Aza, Kanz Studio and WireGuard Manager.';
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -186,6 +187,34 @@ const person = {
   .qr.on{opacity:1}
   .qr svg{width:100%; height:100%; display:block}
 
+  /* event lists: portal, wain and team toys share the batch row look */
+  .feed{list-style:none; padding:0; display:grid; gap:6px; min-height:150px; align-content:start; margin-top:4px}
+  .feed li{display:flex; justify-content:space-between; gap:12px; font-size:14px; padding:8px 10px; border-radius:8px; background:var(--bg); animation:slot .4s var(--pop)}
+  .feed li span:first-child{white-space:nowrap}
+  .feed li span:last-child{color:var(--ink2); text-align:right}
+  .feed li.now{background:transparent; box-shadow:inset 0 0 0 1.5px var(--acc); color:var(--ink)}
+  .feed .empty{color:var(--ink2); background:none; animation:none; padding-left:0}
+  .pick{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px}
+  .pick button{all:unset; cursor:pointer; font-size:13px; font-weight:700; padding:7px 12px; border-radius:8px; color:var(--ink2); box-shadow:inset 0 0 0 1.5px var(--line)}
+  .pick button[aria-pressed="true"]{background:var(--ink); color:var(--bg); box-shadow:none}
+  .pick button:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+
+  /* wain runbook toy */
+  .steps{list-style:none; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+  .steps li{border-radius:10px; padding:12px; background:var(--bg); font-size:14px; color:var(--ink2); transition:color .3s, box-shadow .3s}
+  .steps li b{display:block; color:inherit; font-size:15px}
+  .steps li.now{color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--acc)}
+  .steps li.ok{color:var(--ink)}
+  .steps li.ok b::after{content:" ✓"}
+
+  /* kanz studio toy */
+  .sheet{background:var(--bg); border-radius:12px; padding:26px 22px; min-height:150px; display:flex; align-items:center; justify-content:center}
+  .sheet p{font-family:"Gulzar",serif; font-size:clamp(28px,2.6vw,38px); line-height:2.1; color:var(--ink); margin:0; max-width:none; direction:rtl; text-align:center; min-height:2.1em}
+  .sheet .caret{display:inline-block; width:2px; height:.9em; background:var(--acc); vertical-align:middle; margin-inline-start:2px; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .sheetbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px}
+  .sheetbar .msg{font-size:14px; color:var(--ink2)}
+
   /* dusk band */
   .dusk{min-height:120vh; display:flex; align-items:center}
   .dusk p{font-family:"Gloock",serif; font-size:clamp(38px,5vw,72px); line-height:1.12; max-width:16ch}
@@ -201,6 +230,7 @@ const person = {
     .piece{grid-template-columns:minmax(0,1fr)} .piece.flip .txt{order:0}
     .scan{grid-template-columns:minmax(0,1fr)} .barcode{height:80px}
     .pipe{grid-template-columns:repeat(2,minmax(0,1fr))} .lyric{display:none}
+    .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
     .track{width:90px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -235,8 +265,9 @@ const person = {
         <h2>On the bench now</h2>
         <dl>
           <dt><i></i>Nov 2026</dt><dd>valet, rewritten in Rust: one Windows exe, now with its own logo.</dd>
+          <dt><i></i>Nov 2026</dt><dd>Nama portal: Asset Relocation, Special Needs and three more services.</dd>
+          <dt><i></i>Nov 2026</dt><dd>Kanz Studio: export to PDF and send pages to the Catalog.</dd>
           <dt><i></i>Nov 2026</dt><dd>Meter workshop app: barcode capture and duplicate checks.</dd>
-          <dt><i></i>Nov 2026</dt><dd>Kanz e Aza: stanzas stay whole on shared lyric pages.</dd>
           <dt><i class="off"></i>Jul 2026</dt><dd>Four-org Dynamics 365 CE migration went live.</dd>
         </dl>
       </div>
@@ -246,12 +277,12 @@ const person = {
   <section class="shift" id="day" data-sky="0">
     <div class="wrap">
       <h2>Day shift</h2>
-      <p class="lede">Client systems on Dynamics 365 CE. Big data, real users, and nothing allowed to go missing.</p>
+      <p class="lede">Client systems on Dynamics 365 CE, and the infrastructure under them. Big data, real users, and nothing allowed to go missing.</p>
 
       <article class="piece" data-sky="0">
         <div class="txt">
           <h3>Four orgs, one clean move</h3>
-          <p>At Async Solution I migrated four Dynamics 365 CE orgs: <strong>1.5M+ accounts</strong> and <strong>3.9M+ records</strong>, live in July 2026. I also look after the platform and the release pipelines around it.</p>
+          <p>At Async Solution I merged the Dynamics 365 CE orgs of Oman's four electricity distribution companies into one for Nama Electricity Distribution: <strong>1.5M+ accounts</strong> and <strong>3.9M+ records</strong>, live in July 2026. I also look after the platform and the release pipelines around it.</p>
           <span class="status done"><i></i>Done, live since July 2026</span>
         </div>
         <div class="toy" id="mig">
@@ -268,8 +299,27 @@ const person = {
 
       <article class="piece flip" data-sky="0">
         <div class="txt">
+          <h3>Nama's customer portal</h3>
+          <p>Nama Electricity's self-service portal for customers and staff, live since July 2026. I built its next wave of services: <strong>Asset Relocation</strong>, <strong>Self Meter Reading</strong>, <strong>Special Needs</strong>, <strong>Compensation Requests</strong> and <strong>Initial Connection</strong>. Each checks the request on the portal and, where staff need to act, opens a case in Dynamics 365.</p>
+          <span class="status"><i></i>Live, adding services</span>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>Pick a service, then send a request</span><button class="small go" type="button" id="pGo">Send request</button></div>
+          <div class="pick" role="group" aria-label="Service" id="pPick">
+            <button type="button" aria-pressed="true" data-k="asr">Asset relocation</button>
+            <button type="button" aria-pressed="false" data-k="smr">Self meter reading</button>
+            <button type="button" aria-pressed="false" data-k="sn">Special needs</button>
+            <button type="button" aria-pressed="false" data-k="comr">Compensation</button>
+            <button type="button" aria-pressed="false" data-k="ic">Initial connection</button>
+          </div>
+          <ul class="feed" id="pFeed" aria-live="polite"><li class="empty">No requests yet.</li></ul>
+        </div>
+      </article>
+
+      <article class="piece" data-sky="0">
+        <div class="txt">
           <h3>Meter workshop app</h3>
-          <p>A desktop app for a utility's meter workshop. Operators build a batch from a template, scan meters with a barcode scanner, and the app checks every meter, including duplicates, before filing the batch in Dynamics 365.</p>
+          <p>A desktop app for Nama's meter workshop. Operators build a batch from a template, scan meters with a barcode scanner, and the app checks every meter, including duplicates, before filing the batch in Dynamics 365.</p>
           <span class="status"><i></i>Building now</span>
         </div>
         <div class="toy">
@@ -283,6 +333,43 @@ const person = {
             <button class="small" type="button" id="fileBtn" disabled>File the batch</button>
             <span class="msg" id="scanMsg">Press S to scan</span>
           </div>
+        </div>
+      </article>
+
+      <article class="piece flip" data-sky="0">
+        <div class="txt">
+          <h3>Wain, to production</h3>
+          <p>Wain is a real estate platform for Oman. I handled its production deployment: a self-hosted Docker setup with backups, a full rehearsal before the switch-over, and a runbook for every release after it.</p>
+          <span class="status done"><i></i>Live</span>
+          <div class="links"><a href="https://wain.online">wain.online</a></div>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>Run the go-live, step by step</span><button class="small go" type="button" id="wGo">Go live</button></div>
+          <ol class="steps" id="wSteps">
+            <li><b>Backups</b>off the server</li>
+            <li><b>Database</b>restored, checked</li>
+            <li><b>API</b>built, healthy</li>
+            <li><b>Website</b>built, healthy</li>
+            <li><b>Rehearsal</b>end to end</li>
+            <li><b>Switch-over</b>traffic moves</li>
+          </ol>
+          <div class="sheetbar"><span class="msg" id="wMsg" aria-live="polite">Old server still serving.</span></div>
+        </div>
+      </article>
+
+      <article class="piece" data-sky="0">
+        <div class="txt">
+          <h3>Team access, self-hosted</h3>
+          <p>For the Async team I set up a self-hosted <strong>NetBird</strong> VPN and a self-hosted <strong>Bitwarden</strong> vault (Vaultwarden). Both sign in with Microsoft 365. Shared logins sit in collections, so each person sees only the ones their work needs, and the vault is backed up nightly, encrypted, off the server.</p>
+          <span class="status done"><i></i>Running for the team</span>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>Who is signing in?</span><button class="small go" type="button" id="tGo">Sign in with Microsoft 365</button></div>
+          <div class="pick" role="group" aria-label="Person" id="tPick">
+            <button type="button" aria-pressed="true" data-k="in">Team member</button>
+            <button type="button" aria-pressed="false" data-k="out">Someone who left</button>
+          </div>
+          <ul class="feed" id="tFeed" aria-live="polite"><li class="empty">Signed out.</li></ul>
         </div>
       </article>
     </div>
@@ -334,6 +421,24 @@ const person = {
       </article>
 
       <article class="piece" data-sky="2">
+        <div class="txt">
+          <h3>Kanz Studio</h3>
+          <p>A free, public editor for publishing in Urdu, built to replace InPage. Proper Nastaliq typesetting, InPage's own shortcut keys, and InPage files that open and save back without losing anything. It runs in the browser, on a phone or a desktop.</p>
+          <span class="status"><i></i>Building now</span>
+          <div class="links"><a href="https://studio.kanz-e-aza.com">studio.kanz-e-aza.com</a></div>
+        </div>
+        <div class="toy">
+          <div class="bar"><span>Set a line in Nastaliq</span><button class="small go" type="button" id="sGo">Type a line</button></div>
+          <div class="sheet"><p id="sLine" lang="ur" dir="rtl"></p></div>
+          <div class="sheetbar">
+            <div class="seg" role="group" aria-label="Export"><button type="button" aria-pressed="true" data-x="PDF">PDF</button><button type="button" aria-pressed="false" data-x="Page image">Page image</button><button type="button" aria-pressed="false" data-x="Catalog">Catalog</button></div>
+            <button class="small" type="button" id="sExp">Export</button>
+            <span class="msg" id="sMsg" aria-live="polite"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece flip" data-sky="2">
         <div class="txt">
           <h3>WireGuard Manager for Windows</h3>
           <p>A friendly Windows app for managing WireGuard peers, with QR codes so adding a phone takes one scan.</p>
@@ -558,6 +663,86 @@ const person = {
     });
   }
   $('#vReset').addEventListener('click', valetStart); valetStart();
+
+  /* ---------- shared bits for the newer toys ---------- */
+  const later = (fn, ms) => setTimeout(fn, reduce ? 0 : ms);
+  function picker(el){
+    let k = el.querySelector('[aria-pressed="true"]').dataset.k;
+    el.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      k = b.dataset.k;
+    });
+    return () => k;
+  }
+  function feed(ul, rows){
+    ul.innerHTML = '';
+    rows.forEach(([a, b], i) => later(() => {
+      ul.querySelector('.now')?.classList.remove('now');
+      const li = document.createElement('li'); li.innerHTML = `<span>${a}</span><span>${b}</span>`;
+      if (i === rows.length - 1) li.className = 'now';
+      ul.appendChild(li);
+    }, i * 450));
+  }
+
+  /* ---------- nama portal toy ---------- */
+  const SERVICES = {
+    asr: ['Asset relocation', true], smr: ['Self meter reading', false], sn: ['Special needs', true],
+    comr: ['Compensation', true], ic: ['Initial connection', true],
+  };
+  const pKey = picker($('#pPick'));
+  $('#pGo').addEventListener('click', () => {
+    const [name, crm] = SERVICES[pKey()], ref = 'CAS-' + (10000 + ((Math.random() * 89999) | 0));
+    feed($('#pFeed'), [
+      ['Customer', name + ' request sent'],
+      ['Portal', 'account and connection checked'],
+      crm ? ['Dynamics 365', 'case ' + ref + ' opened for staff'] : ['Portal', 'reading saved, no case needed'],
+    ]);
+  });
+
+  /* ---------- wain go-live toy ---------- */
+  const wSteps = [...document.querySelectorAll('#wSteps li')], wMsg = $('#wMsg'), wGo = $('#wGo');
+  wGo.addEventListener('click', () => {
+    wGo.disabled = true; wSteps.forEach(li => li.className = ''); wMsg.textContent = 'Running the runbook…';
+    wSteps.forEach((li, i) => {
+      later(() => { li.className = 'now'; }, i * 520);
+      later(() => { li.className = 'ok'; }, i * 520 + 480);
+    });
+    later(() => { wMsg.textContent = 'wain.online is live on the new setup.'; wGo.disabled = false; wGo.textContent = 'Run it again'; }, wSteps.length * 520);
+  });
+
+  /* ---------- team access toy ---------- */
+  const tKey = picker($('#tPick'));
+  $('#tGo').addEventListener('click', () => feed($('#tFeed'), tKey() === 'in' ? [
+    ['Microsoft 365', 'signed in, MFA passed'],
+    ['NetBird', 'connected, team servers reachable'],
+    ['Vault', 'unlocked, 2 shared collections'],
+  ] : [
+    ['Microsoft 365', 'account removed when they left'],
+    ['NetBird', 'no access'],
+    ['Vault', 'no access, shared logins stay safe'],
+  ]));
+
+  /* ---------- kanz studio toy ---------- */
+  const LINE = 'اردو اشاعت، ہر آلے پر', sLine = $('#sLine'), sMsg = $('#sMsg'), sGo = $('#sGo');
+  let typing = 0;
+  function typeLine(){
+    clearInterval(typing); sMsg.textContent = '';
+    if (reduce){ sLine.textContent = LINE; return; }
+    let n = 0; sGo.disabled = true;
+    typing = setInterval(() => {
+      n++; sLine.innerHTML = LINE.slice(0, n) + '<span class="caret"></span>';
+      if (n >= LINE.length){ clearInterval(typing); sGo.disabled = false; sGo.textContent = 'Type it again'; }
+    }, 140);
+  }
+  sGo.addEventListener('click', typeLine);
+  const sSeg = document.querySelector('.sheetbar .seg');
+  sSeg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sSeg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+  $('#sExp').addEventListener('click', () => {
+    if (!sLine.textContent) { sMsg.textContent = 'Type a line first.'; return; }
+    const x = sSeg.querySelector('[aria-pressed="true"]').dataset.x;
+    sMsg.textContent = x === 'Catalog' ? 'Page sent to the Kanz e Aza Catalog.' : x + ' ready, Nastaliq intact.';
+  });
 
   /* ---------- kanz pipeline toy ---------- */
   const lyric = $('#lyric'), stns = [...document.querySelectorAll('.stn')];

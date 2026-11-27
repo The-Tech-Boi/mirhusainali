@@ -180,6 +180,7 @@ Each palette is near-monochrome plus a single accent; the frontmatter is the nor
 **Display Font:** Schibsted Grotesk (with system-ui, sans-serif), weights 400/500/700/800
 **Night Font:** Gloock (with serif), 400 only
 **Mono Font:** JetBrains Mono (with monospace), 400/600, tabular numerals
+**Urdu Font:** Gulzar (Nastaliq), 400, Arabic subset only; used only for the Urdu line in the Kanz Studio toy
 
 **Character:** A dense, tightly tracked grotesk does the day's work; an upright high-contrast serif arrives after dusk and changes the voice without changing the layout.
 
@@ -230,6 +231,15 @@ Soft, nested rounding that tightens as elements get smaller: panels 20px, button
 
 ### Segmented control
 Ringed 10px track with 3px padding; pressed option fills with ink, others sit in Slate.
+
+### Picker chips
+Wrapping row of 13px/700 chips, each with its own Hairline ring and 8px radius; the pressed chip fills with ink. Used where options are too many or too long for a segmented control (portal services, who is signing in).
+
+### Event feed
+A list of ground-coloured 8px rows, label left and outcome right in Slate, that arrive one at a time on the pop spring. The latest row is ringed in `--acc` because it is the live one. Shared by the portal, team access and meter toys.
+
+### Runbook steps
+A 3-column grid (2 at 860px and below) of ground tiles with a bold step name over a short note. The running step is ringed in `--acc`; finished steps turn ink and gain a check.
 
 ### Switch
 72x40 pill on Hairline; knob is ground-coloured and springs 32px across; track turns to the accent when on.
